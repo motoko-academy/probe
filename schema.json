@@ -1,0 +1,67 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://github.com/motoko-academy/probe/schema.json",
+    "title": "Test Results",
+    "description": "Test Result of a Suite",
+    "type": "object",
+    "properties": {
+        "tests": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [ "test" ]
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "passed": {
+                                "type": "boolean"
+                            },
+                            "errors": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "name",
+                            "passed"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [ "describe" ]
+                            },
+                            "tests": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/properties/tests/items"
+                                }
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "tests"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "tests"
+    ],
+    "additionalProperties": false
+}
