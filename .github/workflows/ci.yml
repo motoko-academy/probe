@@ -7,4 +7,7 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: '1.20'
+      - uses: aviate-labs/setup-dfx@v0.2.6
+        with:
+          vessel-version: '0.6.5'
       - run: go test -v ./...
